@@ -15,7 +15,7 @@ const data =     {
 
 let DB = null;
 //let DB = new Client(data)
-if(process.env.PGURI) {console.log({connectionString: process.env.PGURI,ssl:true}); DB = new Client(process.env.PGURI);}
+if({connectionString: process.env.PGURI,ssl:true}) {console.log({connectionString: process.env.PGURI,ssl:true}); DB = new Client(process.env.PGURI);}
 else DB = new Client(data)
 
 //console.log(DB)
