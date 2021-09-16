@@ -1,0 +1,13 @@
+{
+  "name": "peteculumoctaviani",
+  "version": "1.0.0",
+  "description": "Project for Hackaton 2021",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start":"node server.js"
+  },
+  "keywords": [],
+  "author": "Carminati Giovanni, Davide Scotti, Carminati Simone, Cattaneo Antonio, Gritti Andrea",
+  "license": "ISC"
+}
