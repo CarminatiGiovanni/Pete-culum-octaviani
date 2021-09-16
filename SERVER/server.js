@@ -13,9 +13,13 @@ const data =     {
     port: process.env.PGPORT,
 }
 
-const DB = new Client(
-    data
-)
+//const DB = null;
+let DB = null
+if(process.env.DATABASE_URL) DB = new Client(process.env.DATABASE_URL)
+else DB = new Client(data)
+
+//console.log(DB)
+
 DB
     .connect()
     .then(() => {console.log(`PostgreSQL DB successfully connected!`); DBstate = true;})
