@@ -5,14 +5,16 @@ const {Client} = require('pg')
 const PORT = process.env.PORT || 3000
 let DBstate = false;
 
+const data =     {
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
+}
+
 const DB = new Client(
-    {
-        user: process.env.PGUSER,
-        host: process.env.PGHOST,
-        database: process.env.PGDATABASE,
-        password: process.env.PGPASSWORD,
-        port: process.env.PGPORT,
-    }
+    data
 )
 DB
     .connect()
