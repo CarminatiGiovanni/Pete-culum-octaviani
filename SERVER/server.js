@@ -23,7 +23,7 @@ let DB = new Client(data)
 DB
     .connect()
     .then(() => {console.log(`PostgreSQL DB successfully connected!`); DBstate = true;})
-    .catch(err => {console.log(`Unable to connect the DB`);DBstate = false;})
+    .catch(err => {console.log(`Unable to connect the DB`);DBstate = false;throw err})
 
 
 app.get('/',(req,res) => {
