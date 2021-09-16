@@ -15,7 +15,7 @@ const data =     {
 
 //const DB = null;
 let DB = null
-if(process.env.DATABASE_URL) DB = new Client(process.env.DATABASE_URL)
+if(process.env.DATABASE_URL) {console.log(process.env.DATABASE_URL); DB = new Client(process.env.DATABASE_URL)}
 else DB = new Client(data)
 
 //console.log(DB)
