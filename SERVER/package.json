@@ -5,9 +5,17 @@
   "main": "server.js",
   "scripts": {
     "test": "nodemon server.js",
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Carminati Giovanni, Davide Scotti, Carminati Simone, Cattaneo Antonio, Gritti Andrea",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }
