@@ -11,12 +11,13 @@ const data =     {
     database: process.env.PGDATABASE,
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
+    ssl:true
 }
 
-let DB = null;
-//let DB = new Client(data)
-if(process.env.PGURI) {console.log(process.env.PGURI); DB = new Client(process.env.PGURI)}
-else DB = new Client(data)
+//let DB = null;
+let DB = new Client(data)
+//if(process.env.PGURI) {console.log(process.env.PGURI); DB = new Client(process.env.PGURI)}
+//else DB = new Client(data)
 
 //console.log(DB)
 
