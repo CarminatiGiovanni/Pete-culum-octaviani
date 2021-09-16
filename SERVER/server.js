@@ -23,8 +23,8 @@ DB
 
 
 app.get('/',(req,res) => {
-    if(DBstate)res.send('hello world!')
-    else res.send('No db connected')
+    if(DBstate)res.send(`Hello world! \n ${data}`)
+    else res.send(`No db connected \n ${data}`)
 })
 
 app.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
