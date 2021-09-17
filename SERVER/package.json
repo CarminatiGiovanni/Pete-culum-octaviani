@@ -11,7 +11,8 @@
   "author": "Carminati Giovanni, Davide Scotti, Carminati Simone, Cattaneo Antonio, Gritti Andrea",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.6"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
