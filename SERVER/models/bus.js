@@ -15,13 +15,21 @@ const bus = new mongoose.Schema(
             required:true
         },
         stops:{
-            type:[{String,String}],
+            type:[{n:Number,stop:String,h:String}],
             required:true
         },
         passengers:{
-            type:[{String,Number}]
+            type:{
+                people:Number,
+                bags:Number,
+                suitcases:Number,
+                scooters:Number,
+                prams:Number,
+                strollers:Number,
+                dogs:Number
+            },
+            required:true
         }
-
     }
 )
 
