@@ -127,18 +127,29 @@
 
     <!--this is the socketio frontend test-->
 
+    <p style='color:black;font-size: large;' id='inputID'></p>
     <button onclick="emit_position(this)">click me to test in console</button>
+    <button onclick="emit_position_2()"> send to my room </button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        socket.emit('bus-id','hello server')
+
+        document.getElementById('inputID').innerText = Number.parseInt(Math.random() * 2);
+        
         socket.on('update',({busStop,lastPerc})=> {
             console.log(busStop,lastPerc)
         })
 
         function emit_position(obj){
-            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc:40})
+            let text = document.getElementById('inputID').innerText
+            console.log(text)
+            if(text){
+                socket.emit('bus-id',text)
+            }
+        }
+        function emit_position_2(){
+            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.random() * 100})
         }
 
     </script>
