@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-require('dotenv').config()
+require('dotenv').config() //FIXME: remove before final version
 const path = require('path')
 const mongoose = require('mongoose')
 
