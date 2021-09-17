@@ -15,7 +15,7 @@ const data =     {
 
 let DB = null;
 //let DB = new Client(data)
-if(process.env.DATABASE_URI) {console.log(process.env.DATABASE_URI); DB = new Client({connectionString: process.env.DATABASE_URI,ssl:true});}
+if(process.env.DATABASE_URL) {console.log(process.env.DATABASE_URL); DB = new Client({connectionString: process.env.DATABASE_URL,ssl:true});}
 else DB = new Client(data)
 
 //console.log(DB)
