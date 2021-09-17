@@ -34,7 +34,7 @@ let DB = null;
 // }
 DB = new Client(data)
 
-app.use(express.static(path.join(__dirname, '../CLIENT')))
+app.use(express.static(path.join(__dirname, 'CLIENT')))
 
 DB
     .connect()
