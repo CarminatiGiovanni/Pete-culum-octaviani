@@ -3,6 +3,7 @@ const app = express()
 require('dotenv').config()
 const {Client} = require('pg')
 const path = require('path')
+const fs = require('fs')
 
 const PORT = process.env.PORT || 3000
 let DBstate = false;
