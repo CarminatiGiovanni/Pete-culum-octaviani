@@ -20,6 +20,10 @@ mongoose
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });
 
 app.use(express.static(path.join(__dirname, 'CLIENT')))
