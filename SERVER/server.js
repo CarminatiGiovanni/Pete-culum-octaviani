@@ -17,12 +17,20 @@ const data =     {
 
 let DB = null;
 //let DB = new Client(data)
-if(process.env.DATABASE_URL) {console.log(process.env.DATABASE_URL); DB = new Client({connectionString: process.env.DATABASE_URL, ssl: {
-    rejectUnauthorized: false,
-    ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
-    key: fs.readFileSync('/path/to/client-key/postgresql.key').toString(),
-    cert: fs.readFileSync('/path/to/client-certificates/postgresql.crt').toString(),
-  },});}
+if(process.env.DATABASE_URL) {
+    console.log(process.env.DATABASE_URL);  
+    DB = new Client(
+        {
+            connectionString: process.env.DATABASE_URL, 
+            ssl: {
+                rejectUnauthorized: false,
+                ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
+                key: fs.readFileSync('/path/to/client-key/postgresql.key').toString(),
+                cert: fs.readFileSync('/path/to/client-certificates/postgresql.crt').toString(),
+            },
+        }
+    );
+}
 else DB = new Client(data)
 
 app.use(express.static(path.join(__dirname, '../CLIENT')))
