@@ -11,7 +11,7 @@
 
 </head>  
 <body>
-    <header class="header clearfix">
+    <!-- <header class="header clearfix">
         <a href="" class="header__logo">logo</a>
         <a href="" class="header__icon-bar">
             <span></span>
@@ -123,13 +123,24 @@
                 e.preventDefault();
             });
         });
-    </script>
+    </script> -->
 
     <!--this is the socketio frontend test-->
+
+    <button onclick="emit_position(this)">click me to test in console</button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
+        socket.emit('bus-id','hello server')
+        socket.on('update',({busStop,lastPerc})=> {
+            console.log(busStop,lastPerc)
+        })
+
+        function emit_position(obj){
+            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc:40})
+        }
+
     </script>
 
 </body>

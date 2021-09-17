@@ -10,6 +10,8 @@ const server = http.createServer(app)
 const PORT = process.env.PORT || 3000
 const io = new Server(server)
 
+const busState = [] //collect the number of people percent {busID:String,perc:Number}
+
 mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
@@ -19,10 +21,20 @@ mongoose
     .catch(err => console.log(err))
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    let busId;
+    socket.on('bus-id',(busid) => {
+        socket.join(busid)
+        if(busState.filter(element => element.busID === busid) === []) busState.push({busID: busId, lastperc: 0})
+        busId = busid
+    })
+
+    socket.on('infopos',({busStop,lastPerc})=> { //i get the position and i emit that to all the room
+        console.log(busStop,lastPerc)
+        io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc})
+    })
 
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log('user disconnected')
     });
 });
 
