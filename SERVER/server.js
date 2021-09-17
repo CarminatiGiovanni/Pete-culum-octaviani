@@ -22,13 +22,15 @@ mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
+        databaseFunctions.find_the_next_bus()
         //app.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`)) //FIXME: think about this way to lauch the server
     })
     .catch(err => console.log(err))
 
-//.........................socket io backend
+//.........................socket io backend.....................................................
 io.on('connection', (socket) => {
     let busId;
+
     socket.on('bus-id',(busid) => {
         socket.join(busid)
         if(busState.filter(element => element.busID === busid) === []) busState.push({busID: busId, lastperc: 0})
@@ -40,8 +42,14 @@ io.on('connection', (socket) => {
         io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc})
     })
 
+    socket.on('leaveRoom',(msg)=> {
+        socket.leave(busid)
+        busid = undefined
+    })
+
     socket.on('disconnect', () => {
         console.log('user disconnected')
+        socket.leave(busid)
     });
 });
 
@@ -50,5 +58,6 @@ app.use(express.static(path.join(__dirname, 'CLIENT')))
 
 app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
+
 
 server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))

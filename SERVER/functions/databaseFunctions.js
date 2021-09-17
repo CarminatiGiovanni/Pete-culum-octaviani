@@ -33,11 +33,33 @@ let insertFunction = (req,res) => {
 
 let selectAllFunction = (req,res) => {
     Bus.find()
-        .then(result => {
-            res.send(result)
-        })
-        .catch(err => console.log(err))
+        .then(result => res.send(result))
+        .catch(err => {console.log(err); res.send('error')})
 }
+
+const days = ['SUN','MON','TUE','WEN','THU','FRI','SAT']
+
+let find_the_next_bus = () => {
+    Bus.find()
+        .then(result => {
+            let found_timeout = false
+            let today = new Date()
+            let startDay = today.getDay()
+            while(found_timeout === false){
+                let listNearestDay = result.filter(el => el.day === startDay)
+                listNearestDay.forEach(element => {
+                    if(startDay === days.indexOf(element.day)){
+                        if(comparaOre()){} //TODO: cerca il pullman successivo comparando l'orario
+                    }
+                });
+                startDay++
+                if(startDay === 7) startDay = 0
+            }
+        })
+        .catch(err => {console.log(err); res.send('error')})
+}
+
+module.exports.find_the_next_bus = find_the_next_bus
 
 module.exports.insertFunction = insertFunction
 module.exports.selectAllFunction = selectAllFunction
