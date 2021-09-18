@@ -46,7 +46,7 @@ const clearBus = (bus) => {
     console.log('deleting: ',(new Date()).toString())
     //console.log(bus)
     global.activeBusses.splice(global.activeBusses.indexOf(bus),1)
-    //console.log(activeBusses)
+    delete global.activeChats[bus.id]
 }
 
 const addToActiveBusses = () => {
@@ -56,6 +56,7 @@ const addToActiveBusses = () => {
     global.orderedListOfBus.remove(0)
 
     global.activeBusses.push(actualBus.bus) 
+    global.activeChats[actualBus.bus.id] = []
 
     //set the timeout to delete the bus when it has arrived
     let harrive = actualBus.bus.stops[actualBus.bus.stops.length - 1].h
@@ -77,7 +78,7 @@ const addToActiveBusses = () => {
     if(delay < 0)setTimeout(() => addToActiveBusses(),0) //if two busses starts at the same hour
     else setTimeout(() => addToActiveBusses(),delay)
 
-    //console.log(activeBusses)
+    console.log(global.activeChats)
 }
 
 const findDateOfBusoObject = (bus) => {
@@ -102,24 +103,27 @@ const find_the_next_bus = () => {
 
     Bus.find()
         .then(result => {
-            result.forEach(element => {
-                global.orderedListOfBus.add({date:findDateOfBusoObject(element),bus: element})
-            });
+            // result.forEach(element => {
+            //     global.orderedListOfBus.add({date:findDateOfBusoObject(element),bus: element})
+            // });
 
 
-            //const b = {"id":"PW236KF","hleaves":"21:55","day":"SAT","stops":[{"n":0,"stop":"Sorisole","h":"06:30"},{"n":1,"stop":"Ponteranica","h":"06:45"},{"n":{"$numberInt":"2"},"stop":"Valtesse","h":"07:15"},{"n":3,"stop":"Monte Rosso","h":"07:25"},
-            //{"n":4,"stop":"Berbenno","h":"21:56"}]}
+            //..................................HARDCODE...................................//
+            // const b = {"id":"PW236KF","hleaves":"23:06","day":"SAT","stops":[{"n":0,"stop":"Sorisole","h":"06:30"},{"n":1,"stop":"Ponteranica","h":"06:45"},{"n":{"$numberInt":"2"},"stop":"Valtesse","h":"07:15"},{"n":3,"stop":"Monte Rosso","h":"07:25"},
+            // {"n":4,"stop":"Berbenno","h":"23:59"}]}
 
             // global.orderedListOfBus.add({
             //     date:findDateOfBusoObject(b),
             //     bus:b
             // })
+            //console.log(global.orderedListOfBus)
+            //....................................................................................
 
             global.orderedListOfBus.sort((a,b) => {return a.date - b.date})
             let today = new Date()
             global.orderedListOfBus.forEach(el => {
                 let delay = el.date - today
-                //console.log(delay)
+                console.log(delay)
                 setTimeout(() => addToActiveBusses(),delay)
             })
 

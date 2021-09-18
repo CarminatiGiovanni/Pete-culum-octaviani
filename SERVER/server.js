@@ -18,8 +18,8 @@ const PORT = process.env.PORT || 3000
 
 const busState = [] // [] //collect the number of people percent {busID:String,perc:Number}
 
-//FIXME: delete this hard-programmed code
-global.activeBusses = require('./test') // = []
+global.activeBusses = [] //require('./test') // = []
+global.activeChats = {} //list of string:lists of messages
 //console.log(global.activeBusses)
 
 //.....................database connection...................................
@@ -27,7 +27,7 @@ mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
-        //databaseFunctions.find_the_next_bus() //FIXME: uncommet
+        databaseFunctions.find_the_next_bus()
         server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
@@ -41,6 +41,8 @@ io.on('connection', (socket) => {
         socket.join(busid)
         if(busState.filter(element => element.busID === busid) === []) busState.push({busID: busId, lastperc: 0})
         busId = busid
+
+        io.to(socket.id).emit('old_messages',(global.activeChats[busId]))
     })
 
     socket.on('infopos',({busStop,lastPerc})=> { //i get the position and i emit that to all the room
@@ -48,6 +50,7 @@ io.on('connection', (socket) => {
         let timeNow = new Date()
         let timestamp = timeNow.toTimeString().split(' ')[0].substring(0,5)
         io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
+        global.activeChats[busId].push({busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
     })
 
     socket.on('leaveRoom',(msg)=> {

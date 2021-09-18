@@ -18,6 +18,12 @@ socket.on('update',({busStop,lastPerc,timestamp})=> {
     scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
 })
 
+socket.on('old_messages',(list) => {
+    list.forEach(element => {
+        scrollbar.innerHTML += generateChatMessage(element.busStop,element.lastPerc,element.timestamp)
+    });
+})
+
 const sendPosition = () => {
     if(stop && slider_has_moved) {
         openCity(event,'second')
