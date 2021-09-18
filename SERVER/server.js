@@ -16,6 +16,7 @@ const io = new Server(server)
 const PORT = process.env.PORT || 3000
 
 const busState = [] //collect the number of people percent {busID:String,perc:Number}
+let activeBusses = []
 
 //.....................database connection...................................
 mongoose
