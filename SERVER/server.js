@@ -7,8 +7,7 @@ const Bus =                 require('./models/bus')
 const databaseFunctions =   require('./functions/databaseFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
-const url =                 require('url')
-const { type } = require('os')
+const getPostFunctions =    require('./functions/getPostFunctions')
                             require('dotenv').config() //FIXME: remove before final version
 
 //.................................const..........................................
@@ -71,18 +70,11 @@ app.use(bodyParser.json())
 app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.get('/bus/:id',(req,res) => {
-    //console.log(req.params.id)
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_position.html'))
 })
 
 
-app.post('/busPosition', (req,res) => {
-    //console.log(req.body)
-    const [busSearched] = global.activeBusses.filter(el => el.id === req.body.id)
-    //console.log(busSearched)
-    if(busSearched === undefined) res.json({'error' : 'error'})
-    else res.json(busSearched)
-})
+app.post('/busPosition', getPostFunctions.busPosition)
 
 app.post('/activeBusses',(req,res) => {
     res.json({'busses':global.activeBusses})

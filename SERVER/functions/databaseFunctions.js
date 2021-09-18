@@ -1,7 +1,7 @@
 const { count } = require('./../models/bus')
 const Bus =                 require('./../models/bus')
 
-let insertFunction = (req,res) => {
+const insertFunction = (req,res) => {
     // const bus = new Bus(
     //     {
     //         id:"PW236KF",
@@ -32,7 +32,7 @@ let insertFunction = (req,res) => {
         .catch(err => console.log(err))
 }
 
-let selectAllFunction = (req,res) => {
+const selectAllFunction = (req,res) => {
     Bus.find()
         .then(result => res.send(result))
         .catch(err => {console.log(err); res.send('error')})
@@ -42,12 +42,12 @@ const days = ['SUN','MON','TUE','WEN','THU','FRI','SAT'] //local
 
 global.timeout = undefined
 
-let addToActiveBusses = (bus) => {
+const addToActiveBusses = (bus) => {
     console.log('called the callback function')
     return find_the_next_bus()
 }
 
-let find_the_next_bus = () => {
+const find_the_next_bus = () => {
 
     function sumWeek(a,b){ //for iterate days
         if(a + b >= 7 )return a +b -7
