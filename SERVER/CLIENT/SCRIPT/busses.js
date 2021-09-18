@@ -3,7 +3,7 @@ let createCard = (obj) => {
     const stop = obj.stops[obj.stops.length-1].stop
     let stops = ''
     obj.stops.forEach(element => {
-        stops += element.stop + ' '
+        stops += element.stop + '<br>'
     });
     const hleave = obj.stops[0].h
     const harrive = obj.stops[obj.stops.length-1].h
