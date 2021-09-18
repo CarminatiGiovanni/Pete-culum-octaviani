@@ -7,6 +7,8 @@ const Bus =                 require('./models/bus')
 const databaseFunctions =   require('./functions/databaseFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
+const url =                 require('url')
+const { type } = require('os')
                             require('dotenv').config() //FIXME: remove before final version
 
 //.................................const..........................................
@@ -35,8 +37,9 @@ mongoose
 //.........................socket io backend.....................................................
 io.on('connection', (socket) => {
     let busId;
-
+    console.log('user has connected')
     socket.on('bus-id',(busid) => {
+        console.log(busid)
         socket.join(busid)
         if(busState.filter(element => element.busID === busid) === []) busState.push({busID: busId, lastperc: 0})
         busId = busid
@@ -44,11 +47,13 @@ io.on('connection', (socket) => {
 
     socket.on('infopos',({busStop,lastPerc})=> { //i get the position and i emit that to all the room
         console.log(busStop,lastPerc)
-        io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc})
+        let timeNow = new Date()
+        let timestamp = timeNow.getHours().toString() + ':' + timeNow.getMinutes().toString()
+        io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
     })
 
     socket.on('leaveRoom',(msg)=> {
-        socket.leave(busid)
+        socket.leave(busId)
         busid = undefined
     })
 
@@ -65,6 +70,20 @@ app.use(bodyParser.json())
 
 app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
+app.get('/bus/:id',(req,res) => {
+    //console.log(req.params.id)
+    res.sendFile(path.join(__dirname,'/CLIENT/HTML/scrollbar.html'))
+})
+
+
+app.post('/busPosition', (req,res) => {
+    //console.log(req.body)
+    const [busSearched] = global.activeBusses.filter(el => el.id === req.body.id)
+    //console.log(busSearched)
+    if(busSearched === undefined) res.json({'error' : 'error'})
+    else res.json(busSearched)
+})
+
 app.post('/activeBusses',(req,res) => {
     res.json({'busses':global.activeBusses})
 })

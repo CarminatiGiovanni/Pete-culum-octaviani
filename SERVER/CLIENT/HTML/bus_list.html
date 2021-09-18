@@ -16,7 +16,7 @@
     </head>  
     <script>
         const redirect = (el) => {
-            location.replace("http://localhost:3000/bus/" + el.id)
+            location.replace(window.location.protocol + "//" + window.location.host + "/bus/" + el.id)
         }
     </script>
     <body onload="loadBusses(document.getElementById('cardBusses'))">

@@ -41,8 +41,9 @@ function loadBusses(section){
         .then(result => 
             result.json()
                 .then((r) => {
-                    const listActiveBusses = r.busses.data
-                    console.log(listActiveBusses)
+                    //console.log(r)
+                    const listActiveBusses = r.busses
+                    //console.log(listActiveBusses)
                     listActiveBusses.forEach(element => {
                         section.innerHTML += createCard(element)
                     })
