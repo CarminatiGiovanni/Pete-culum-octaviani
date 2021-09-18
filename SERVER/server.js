@@ -72,7 +72,7 @@ app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.get('/bus/:id',(req,res) => {
     //console.log(req.params.id)
-    res.sendFile(path.join(__dirname,'/CLIENT/HTML/single.html'))
+    res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_position.html'))
 })
 
 
