@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000
 const busState = [] //collect the number of people percent {busID:String,perc:Number}
 
 //FIXME: delete this hard-programmed code
-global.activeBusses = require('./test')
+global.activeBusses = require('./test') // = []
 //console.log(global.activeBusses)
 
 //.....................database connection...................................
@@ -28,7 +28,7 @@ mongoose
     .then(() => {
         console.log('DB connected')
         databaseFunctions.find_the_next_bus()
-        //app.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`)) //FIXME: think about this way to lauch the server
+        server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
 
@@ -78,6 +78,3 @@ app.post('/busPosition', getPostFunctions.busPosition)
 app.post('/activeBusses',(req,res) => {
     res.json({'busses':global.activeBusses})
 })
-
-
-server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
