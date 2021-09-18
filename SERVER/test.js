@@ -10,15 +10,6 @@ let data = [
             {n:3,stop:'Zogno',h:'16:15'},
             {n:4,stop:'Bergamo',h:'17:30'},
         ],
-        passengers:{
-            people:10,
-            bags:5,
-            suitcases:1,
-            scooters:1,
-            prams:0,
-            strollers:0,
-            dogs:0
-        }
     },
 
     {
@@ -32,15 +23,6 @@ let data = [
             {n:3,stop:'Almenno San Bartolomeo',h:'07:25'},
             {n:4,stop:'Berbenno',h:'7:45'},
         ],
-        passengers:{
-            people:34,
-            bags:12,
-            suitcases:2,
-            scooters:0,
-            prams:1,
-            strollers:1,
-            dogs:2
-        }
     },
 
     {
@@ -54,15 +36,6 @@ let data = [
             {n:3,stop:'Olmo al Brembo',h:'10:45'},
             {n:4,stop:'Piazza Brembana',h:'11:00'},
         ],
-        passengers:{
-            people:17,
-            bags:7,
-            suitcases:0,
-            scooters:1,
-            prams:0,
-            strollers:1,
-            dogs:0
-        }
     },
 
     {
@@ -76,15 +49,6 @@ let data = [
             {n:3,stop:'Verdellino',h:'19:30'},
             {n:4,stop:'Treviglio',h:'20:00'},
         ],
-        passengers:{
-            people:19,
-            bags:3,
-            suitcases:5,
-            scooters:1,
-            prams:1,
-            strollers:0,
-            dogs:0
-        }
     },
 
     {
@@ -98,15 +62,6 @@ let data = [
             {n:3,stop:'Monte Rosso',h:'07:25'},
             {n:4,stop:'Berbenno',h:'7:45'},
         ],
-        passengers:{
-            people:11,
-            bags:7,
-            suitcases:2,
-            scooters:0,
-            prams:1,
-            strollers:1,
-            dogs:2
-        }
     }
 ]
 

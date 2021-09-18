@@ -65,7 +65,9 @@ const addToActiveBusses = () => {
     global.orderedListOfBus.add(actualBus)
 
     const today = new Date()
-    setTimeout(() => addToActiveBusses(),actualBus.date - today)
+    let delay = actualBus.date - today
+    if(delay < 0)setTimeout(() => addToActiveBusses(),0) //if two busses starts at the same hour
+    else setTimeout(() => addToActiveBusses(),delay)
 }
 
 const findDateOfBusoObject = (bus) => {
