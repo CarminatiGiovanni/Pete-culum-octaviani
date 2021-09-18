@@ -16,7 +16,7 @@ const io = new Server(server)
 
 const PORT = process.env.PORT || 3000
 
-const busState = [] //collect the number of people percent {busID:String,perc:Number}
+const busState = [] // [] //collect the number of people percent {busID:String,perc:Number}
 
 //FIXME: delete this hard-programmed code
 global.activeBusses = require('./test') // = []
@@ -27,7 +27,7 @@ mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
-        databaseFunctions.find_the_next_bus()
+        //databaseFunctions.find_the_next_bus() //FIXME: uncommet
         server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
