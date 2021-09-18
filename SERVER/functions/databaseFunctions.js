@@ -93,7 +93,7 @@ let find_the_next_bus = () => {
 
             if(nextBus.bus === undefined) console.log('There are no busses in the DB please update')
             else{
-                //console.log("nextBus:",nextBus.bus.id, 'h: ',nextBus.h.toString())
+                console.log("nextBus:",nextBus.bus.id, 'h: ',nextBus.h.toString())
                 if(global.timeout !== undefined) clearTimeout(global.timeout)
                 global.timeout = setTimeout(() => addToActiveBusses(nextBus.bus),(nextBus.h - today))
             } //TODO: check if there are more busses at the same hour
