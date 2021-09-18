@@ -40,7 +40,7 @@
 
         ///test
         function emit_position_2(){
-            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.random() * 100})    
+            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100)})    
         }
 
     </script>

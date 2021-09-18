@@ -1,39 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="../STYLE/style.css">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-</head>  
-<body onload="openCity(event, 'first')">
-    
-    <header class="header clearfix">
-        <a href="" class="header__logo">logo</a>
-        <a href="" class="header__icon-bar">
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-        <ul class="header__menu animate">
-            <li class="header__menu__item"><a href="index.html">Home</a></li>
-            <li class="header__menu__item"><a href="single.html">Single</a></li>
-            <li class="header__menu__item"><a href="page.html">Page</a></li>
-            <li class="header__menu__item"><a href="">Item</a></li>
-            <li class="header__menu__item"><a href="">Item</a></li>
-        </ul>
-    </header>
-    <br>
-    <article class="single">
-        <div class="single__copy">
-           <style>
-                .main{
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .main{
                 border: 1px solid black;
-                margin: 0px 0px;
+                margin: 50px 50px;
                 background-color: rgb(68, 56, 56);
             }
             .tab {
@@ -116,7 +91,7 @@
                 position: absolute;
                 width: 25px;
                 height: 25px;
-                right: -17px;
+                right: -13px;
                 background-color: white;
                 border: 4px solid #FF9F55;
                 top: 15px;
@@ -124,9 +99,9 @@
                 z-index: 1;
             }
 
-            /* Place the container to the left */
+           /* Place the container to the left */
             .left {
-                left: 0%;
+                left: 0;
             }
 
             /* Place the container to the right */
@@ -278,18 +253,14 @@
                 font-size: 12px;
                 padding: 5px;
             }
-           </style>
-           <br>
-           <br>
-           <br>
-           <div class="main">
-               <!---...............................TWO upper buttons..........................................--->
+        </style>
+    </head>
+    <body>
+        <div class="main">
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'first')">Timeline</button>
-                <button class="tablinks" onclick="openCity(event, 'second')">Live chat</button>
+                <button class="tablinks" onclick="openCity(event, 'first')">first</button>
+                <button class="tablinks" onclick="openCity(event, 'second')">second</button>
             </div>
-             <!---...............................first div..........................................--->
-
             <div id="first" class="page">
                 <small style="color: floralwhite;">select the stop</small>
                 <div class="timeline">
@@ -314,34 +285,63 @@
                         </div>
                     </div>
                 </div>
+                <div class="w3-light-grey progress-bar">
+                    <div class="w3-container w3-round w3-center" style="width:25%;background-color: #3adb6a;">25%</div>
+                </div>
                 <div class="slidecontainer" id="slider">
                     <input type="range" min="0" max="100" value="50" class="slider" id="myRange" step="10">
                     <p style="color: white;">Capacity: <span id="value"></span></p>
-
-                    <!--............................submit.................................................-->
-                    <button type="submit" class="w3-button" style="background-color: #3adb6a;" id='btnSubmit' onclick="sendPosition()">Submit</button>
+                    <button type="submit" class="w3-button" style="background-color: #3adb6a;">Submit</button>
                 </div>
             </div>
-
-             <!---...............................second div..........................................--->
             <div id="second" class="page">
                 <div class="scroll__div">
-                    <div class="scroll__object" id='chat'>
+                    <div class="scroll__object" id='chat'> <!-- this is where the chatt goes -->
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--<button onclick="emit_position_2()">click me for testing</button>-->
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+            const scrollbar = document.getElementById('chat')
+
+            function generateChatMessage (busStop,lastPerc,timestamp) {
+                
+                let string = `
+                <p class="scroll__message">${timestamp} - ${lastPerc}% - ${busStop}</p>
+                `
+                return string
+            }
+
+            const socket = io();
+            socket.emit('bus-id',window.location.pathname.substring(5))
+
+            for(let i = 0; i< 30;i ++)emit_position_2() //FIXME: decommentami
+
+            socket.on('update',({busStop,lastPerc,timestamp})=> {
+                console.log(busStop,lastPerc,timestamp)
+                scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
+            })
+
+            ///test
+            function emit_position_2(){
+                socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100) })    
+            }
+
+        </script>
+
         <script>
             var slider = document.getElementById("myRange");
             var output = document.getElementById("value");
-            var slider_has_moved = false
-            output.innerText = slider.value + '%';
+            output.innerHTML = slider.value + '%';
 
             slider.oninput = function() {
-                output.innerText = this.value + '%';
-                slider_has_moved = true
+                output.innerHTML = this.value + '%';
             }
-
 
             function openCity(evt, id) {
                 var i, pages, tablinks;
@@ -358,7 +358,7 @@
             }
             var stop = ""
             function clickStop(el){
-                stop = el.id //name of the stop
+                stop = el.id
                 var blocks = document.getElementsByClassName("content")
                 for (i = 0; i < blocks.length; i++) {
                     blocks[i].style.backgroundColor = "white";
@@ -366,62 +366,5 @@
                 el.style.backgroundColor = "#3adb6a"
             }
         </script>
-        </div>
-    </article>
-
-    <footer class="footer">
-        <p>Copiright - 2021 ScottiDesign.com</p>
-    </footer>
-
-        <!--.....................................socket io section .................................................-->
-        <script src="/socket.io/socket.io.js"></script>
-    <script>
-        
-        const scrollbar = document.getElementById('chat')
-
-        function generateChatMessage (busStop,lastPerc,timestamp) {
-            
-            let string = `
-            <p class="scroll__message">${timestamp} - ${lastPerc} - ${busStop}</p>
-            `
-            return string
-        }
-
-        const socket = io();
-        socket.emit('bus-id',window.location.pathname.substring(5))
-
-        //for(let i = 0; i< 30;i ++)emit_position_2() //FIXME: decommentami
-
-        socket.on('update',({busStop,lastPerc,timestamp})=> {
-            console.log(busStop,lastPerc,timestamp)
-            scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
-        })
-
-        ///test
-        function emit_position_2(){
-            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100) })    
-        }
-
-        function sendPosition(){
-            if(stop && slider_has_moved) {
-                console.log('stop: ', stop, 'output: ', output.innerText)
-                socket.emit('infopos', {busStop: stop,lastPerc: output.innerText})
-            }
-        }
-
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-
-            $(".header__icon-bar").click(function(e){
-
-                $(".header__menu").toggleClass('is-open');
-                e.preventDefault();
-            });
-        });
-    </script>
-    
-</body>
+    </body> 
 </html>
