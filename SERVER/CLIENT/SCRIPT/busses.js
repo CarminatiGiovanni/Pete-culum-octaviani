@@ -10,7 +10,7 @@ let createCard = (obj) => {
 
     let string = 
     `  
-    <div class="card__findbus" id="bus-1" onclick="redirect(this)" title="bus-1">
+    <div class="card__findbus" id="${obj.id}" onclick="redirect(this)" title="bus-1">
         <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
         <div class="card__copy">
             <h3 style="color:lime;font-style:bold">${start}</h3>
