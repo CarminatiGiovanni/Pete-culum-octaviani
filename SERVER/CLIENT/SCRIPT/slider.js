@@ -1,16 +1,19 @@
-var slider = document.getElementById("myRange");
-var output = document.getElementById("value");
-var slider_has_moved = false
+let slider = document.getElementById("myRange");
+let output = document.getElementById("value");
+let slider_has_moved = false
+let stop = ""
+
 output.innerText = slider.value + '%';
 
-slider.oninput = function() {
+slider.oninput = () => {
     output.innerText = this.value + '%';
     slider_has_moved = true
 }
 
+//........................functions...................................
 
-function openCity(evt, id) {
-    var i, pages, tablinks;
+const openCity = (evt, id) => {
+    let i, pages, tablinks;
     pages = document.getElementsByClassName("page");
     for (i = 0; i < pages.length; i++) {
         pages[i].style.display = "none";
@@ -22,10 +25,10 @@ function openCity(evt, id) {
     document.getElementById(id).style.display = "block";
     evt.currentTarget.className += " active";
 }
-var stop = ""
-function clickStop(el){
+
+const clickStop = (el) => {
     stop = el.id //name of the stop
-    var blocks = document.getElementsByClassName("content")
+    let blocks = document.getElementsByClassName("content")
     for (i = 0; i < blocks.length; i++) {
         blocks[i].style.backgroundColor = "white";
     }
