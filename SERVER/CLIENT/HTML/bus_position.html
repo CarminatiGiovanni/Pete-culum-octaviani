@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 </head>  
-<body onload="openCity(event, 'first')">
+<body onload="openCity(event, 'first'), loadStops()">
     
     <header class="header clearfix">
         <a href="" class="header__logo">logo</a>
@@ -292,27 +292,7 @@
 
             <div id="first" class="page">
                 <small style="color: floralwhite;">select the stop</small>
-                <div class="timeline">
-                    <div class="container left">
-                      <div class="content" onclick="clickStop(this)" id="bergamo">
-                        <h4>Bergamo - 12:00</h4>
-                      </div>
-                    </div>
-                    <div class="container right">
-                        <div class="content" onclick="clickStop(this)" id="milano">
-                          <h4>Milano - 12:30</h4>
-                        </div>
-                    </div>
-                    <div class="container left">
-                        <div class="content" onclick="clickStop(this)" id="roma">
-                          <h4>Roma - 13:00</h4>
-                        </div>
-                    </div>
-                    <div class="container right">
-                        <div class="content" onclick="clickStop(this)" id="napoli">
-                          <h4>Napoli - 14:00</h4>
-                        </div>
-                    </div>
+                <div class="timeline" id='timeline_bus'> <!--............timeline..............-->
                 </div>
                 <div class="slidecontainer" id="slider">
                     <input type="range" min="0" max="100" value="50" class="slider" id="myRange" step="10">
@@ -331,6 +311,7 @@
                 </div>
             </div>
         </div>
+        <!--.......................slider........................................-->
         <script>
             var slider = document.getElementById("myRange");
             var output = document.getElementById("value");
@@ -375,41 +356,90 @@
 
         <!--.....................................socket io section .................................................-->
         <script src="/socket.io/socket.io.js"></script>
-    <script>
-        
-        const scrollbar = document.getElementById('chat')
-
-        function generateChatMessage (busStop,lastPerc,timestamp) {
+        <script>
             
-            let string = `
-            <p class="scroll__message">${timestamp} - ${lastPerc} - ${busStop}</p>
-            `
-            return string
-        }
+            const scrollbar = document.getElementById('chat')
 
-        const socket = io();
-        socket.emit('bus-id',window.location.pathname.substring(5))
-
-        //for(let i = 0; i< 30;i ++)emit_position_2() //FIXME: decommentami
-
-        socket.on('update',({busStop,lastPerc,timestamp})=> {
-            console.log(busStop,lastPerc,timestamp)
-            scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
-        })
-
-        ///test
-        function emit_position_2(){
-            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100) })    
-        }
-
-        function sendPosition(){
-            if(stop && slider_has_moved) {
-                console.log('stop: ', stop, 'output: ', output.innerText)
-                socket.emit('infopos', {busStop: stop,lastPerc: output.innerText})
+            function generateChatMessage (busStop,lastPerc,timestamp) {
+                
+                let string = `
+                <p class="scroll__message">${timestamp} - ${lastPerc} - ${busStop}</p>
+                `
+                return string
             }
-        }
 
-    </script>
+            const socket = io();
+            socket.emit('bus-id',window.location.pathname.substring(5))
+
+            //for(let i = 0; i< 30;i ++)emit_position_2() //FIXME: decommentami
+
+            socket.on('update',({busStop,lastPerc,timestamp})=> {
+                //console.log(busStop,lastPerc,timestamp)
+                scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
+            })
+
+            ///test
+            function emit_position_2(){
+                socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100) })    
+            }
+
+            function sendPosition(){
+                if(stop && slider_has_moved) {
+                    alert('successfully submitted')
+                    //console.log('stop: ', stop, 'output: ', output.innerText)
+                    socket.emit('infopos', {busStop: stop,lastPerc: output.innerText})
+                }
+            }
+
+        </script>
+
+        <!--...........................................load stops..........................................................-->
+
+        <script>
+
+
+            function loadStops(){
+                const address = window.location.protocol + '//' + window.location.host + '/busPosition'
+                const timeline = document.getElementById('timeline_bus')
+
+                const options = {
+                    method:'POST',
+                    body:JSON.stringify({id:window.location.pathname.substring(5)}),
+                    headers: {"Content-type": "application/json; charset=UTF-8"}
+                }
+
+                function stringTimeline({stop,h,n}){
+                    let lr = n % 2 == 0 ? 'left' : 'right'
+                    console.log(lr)
+                    let string = `
+                        <div class="container ${lr}">
+                            <div class="content" onclick="clickStop(this)" id="${stop}">
+                                <h4>${stop} - ${h}</h4>
+                            </div>
+                        </div>
+                    `
+                    return string
+                }
+
+                function generateThePage(bus){
+                    console.log(bus.stops.length)
+                    for(let i = 0; i < bus.stops.length;i++){
+                        console.log(bus.stops[i])
+                        timeline.innerHTML += stringTimeline(bus.stops[i])
+                    }
+                }
+
+                fetch(address,options)
+                    .then((p => 
+                        p.json()
+                        .then(r => {
+                            //console.log(r)
+                            generateThePage(r)
+                        })
+                    ))
+                    .catch(e => console.log(e))
+            }
+        </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
