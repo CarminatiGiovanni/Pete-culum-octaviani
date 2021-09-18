@@ -18,7 +18,10 @@ const vespasianus = new mongoose.Schema(
             type:Boolean,
             required:true
         },
-        description: String
+        description: {
+            type:String,
+            required:true
+        }
     }
 )
 

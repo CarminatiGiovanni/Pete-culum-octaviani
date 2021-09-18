@@ -4,6 +4,7 @@ const http =                require('http')
 const path =                require('path')
 const mongoose =            require('mongoose')
 const databaseFunctions =   require('./functions/databaseFunctions')
+const insertFunctions =     require('./functions/insertFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
 const getPostFunctions =    require('./functions/getPostFunctions')
@@ -69,11 +70,15 @@ app.use(express.static(path.join(__dirname, 'CLIENT')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/a',databaseFunctions.insertFunction)
+app.get('/a',insertFunctions.insertBus)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.get('/bus/:id',(req,res) => {
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_position.html'))
 })
+
+app.get('/insertVespasianus',insertFunctions.insertVespasianus)
+
+app.get('/insertFountains',insertFunctions.insertFountain)
 
 
 app.post('/busPosition', getPostFunctions.busPosition)
