@@ -1,57 +1,64 @@
-const express = require('express')
-const app = express()
-require('dotenv').config() //FIXME: remove before final version
-const path = require('path')
-const mongoose = require('mongoose')
-const Bus = require('./models/bus')
+//...................................require.........................................
+const express =             require('express')
+const http =                require('http')
+const path =                require('path')
+const mongoose =            require('mongoose')
+const Bus =                 require('./models/bus')
+const databaseFunctions =   require('./functions/databaseFunctions')
+const {Server} =            require('socket.io')
+                            require('dotenv').config() //FIXME: remove before final version
 
+//.................................const..........................................
+const app = express()
+const server = http.createServer(app)
+const io = new Server(server)
+
+const PORT = process.env.PORT || 3000
+
+const busState = [] //collect the number of people percent {busID:String,perc:Number}
+let activeBusses = []
+
+//.....................database connection...................................
 mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
+        databaseFunctions.find_the_next_bus()
         //app.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`)) //FIXME: think about this way to lauch the server
     })
     .catch(err => console.log(err))
 
-const PORT = process.env.PORT || 3000
+//.........................socket io backend.....................................................
+io.on('connection', (socket) => {
+    let busId;
 
-app.use(express.static(path.join(__dirname, 'CLIENT')))
-
-app.get('/a',(req,res) => {
-    //res.send(JSON.stringify(req.params))
-    const bus = new Bus({
-        id:"AA123BB",
-        hleaves:"15:30",
-        day:"MON", //MON TUE WEN THU FRI SAT SUN
-        stops:[
-            {n:0,stop:'Piazza Brembana',h:'15:30'},
-            {n:1,stop:'San Giovanni Bianco',h:'15:45'},
-            {n:2,stop:'San Pellegrino',h:'16:00'},
-            {n:3,stop:'Zogno',h:'16:15'},
-            {n:4,stop:'Bergamo',h:'17:30'},
-        ],
-        passengers:{
-            people:10,
-            bags:5,
-            suitcases:1,
-            scooters:1,
-            prams:0,
-            strollers:0,
-            dogs:0
-        }
+    socket.on('bus-id',(busid) => {
+        socket.join(busid)
+        if(busState.filter(element => element.busID === busid) === []) busState.push({busID: busId, lastperc: 0})
+        busId = busid
     })
 
-    bus.save()
-        .then((result) => {res.send(result)})
-        .catch(err => console.log("error"))
-})
+    socket.on('infopos',({busStop,lastPerc})=> { //i get the position and i emit that to all the room
+        console.log(busStop,lastPerc)
+        io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc})
+    })
 
-app.get('/all-blogs',(req,res) => {
-    Blog.find()
-        .then(result => {
-            res.send(result)
-        })
-        .catch(err => console.log(err))
-})
+    socket.on('leaveRoom',(msg)=> {
+        socket.leave(busid)
+        busid = undefined
+    })
 
-app.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+        socket.leave(busid)
+    });
+});
+
+//......................EXPRESS.................................
+app.use(express.static(path.join(__dirname, 'CLIENT')))
+
+app.get('/a',databaseFunctions.insertFunction)
+app.get('/all-busses',databaseFunctions.selectAllFunction)
+
+
+server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
