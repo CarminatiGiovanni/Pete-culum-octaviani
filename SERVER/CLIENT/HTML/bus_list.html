@@ -11,20 +11,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link rel="stylesheet" href="style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            var url = "http://agblog.altervista.org/"
-            function getApi(){
-                $.ajax(url,function(data){
-                    data = JSON.parse(data);
-                    console.log(data)
-                });
-            }
-        </script>
-    </head>
-    
-    <body onload="getApi()">    
+        <link rel="stylesheet" href="../STYLE/style.css">
+
+    </head>  
+    <script src="./SCRIPT/busses.js"></script>
+    <script>
+        const redirect = (el) => {
+            location.replace("http://localhost:3000/bus/" + el.id)
+        }
+    </script>
+    <body onload="loadBusses()">
         <header class="header clearfix">
             <a href="" class="header__logo">logo</a>
             <a href="" class="header__icon-bar">
@@ -33,159 +29,46 @@
                 <span></span>
             </a>
             <ul class="header__menu animate">
-                <li class="header__menu__item"><a href="index.html">Home</a></li>
+                <li class="header__menu__item"><a href="../index.html">Home</a></li>
                 <li class="header__menu__item"><a href="bus_list.html">Find Bus</a></li>
                 <li class="header__menu__item"><a href="faq.html">FAQ</a></li>
             </ul>
         </header>
-        
-
-
-        <!-- Footer -->
-        <footer class="bg-dark text-center text-white">
-            <!-- Grid container -->
-            <div class="container p-4">
-        
-            <!-- Section: Social media -->
-            <section class="mb-4">
-                <!-- Facebook -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
-        
-                <!-- Twitter -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i class="fab fa-twitter"></i></a>
-        
-                <!-- Google -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i class="fab fa-google"></i></a>
-        
-                <!-- Instagram -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="fab fa-instagram"></i></a>
-        
-                <!-- Linkedin -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
-                <!-- Github -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i class="fab fa-github"></i></a>
-            </section>
-            <!-- Section: Social media -->
-        
-        
-        
-            <!-- Section: Text -->
-            <section class="mb-4">
-                <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                distinctio earum repellat quaerat voluptatibus placeat nam,
-                commodi optio pariatur est quia magnam eum harum corrupti dicta,
-                aliquam sequi voluptate quas.
-                </p>
-            </section>
-            <!-- Section: Text -->
-        
-        
-            <!-- Section: Links -->
-            <section class="">
-                <!--Grid row-->
-                <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
-        
-                    <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#!" class="text-white">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
-                    </li>
-                    </ul>
+        <section class="cards clearfix">
+            <div class="card__findbus" id="bus-1" onclick="redirect(this)" title="bus-1">
+                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
+                <div class="card__copy">
+                    <h3>PARTENZA</h3>
+                    <h3>DESTINAZIONE</h3>
+                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
                 </div>
-                <!--Grid column-->
-        
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
-        
-                    <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#!" class="text-white">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
-                    </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-        
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
-        
-                    <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#!" class="text-white">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
-                    </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-        
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
-        
-                    <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#!" class="text-white">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
-                    </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-                </div>
-                <!--Grid row-->
-            </section>
-            <!-- Section: Links -->
-        
             </div>
-            <!-- Grid container -->
-        
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            Â© 2020 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <div class="card__findbus" id="bus-2" onclick="redirect(this)" title="bus-1">
+                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
+                <div class="card__copy">
+                    <h3>PARTENZA</h3>
+                    <h3>DESTINAZIONE</h3>
+                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
+                </div>
             </div>
-            <!-- Copyright -->
+            <div class="card__findbus" id="bus-3" onclick="redirect(this)" title="bus-1">
+                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
+                <div class="card__copy">
+                    <h3>PARTENZA</h3>
+                    <h3>DESTINAZIONE</h3>
+                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
+                </div>
+            </div>
+            <div class="card__findbus" id="bus-4" onclick="redirect(this)" title="bus-1">
+                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
+                <div class="card__copy">
+                    <h3>PARTENZA</h3>
+                    <h3>DESTINAZIONE</h3>
+                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
+                </div>
+            </div>
+        </section> 
         
-        </footer>
-  <!-- Footer -->
-
         
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
