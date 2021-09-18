@@ -17,7 +17,10 @@ const io = new Server(server)
 const PORT = process.env.PORT || 3000
 
 const busState = [] //collect the number of people percent {busID:String,perc:Number}
-global.activeBusses = []
+
+//FIXME: delete this hard-programmed code
+global.activeBusses = require('./test')
+//console.log(global.activeBusses)
 
 //.....................database connection...................................
 mongoose
@@ -63,8 +66,7 @@ app.use(bodyParser.json())
 app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.post('/activeBusses',(req,res) => {
-    console.log(req.body)
-    res.json({'good':'done'})
+    res.json({'busses':global.activeBusses})
 })
 
 
