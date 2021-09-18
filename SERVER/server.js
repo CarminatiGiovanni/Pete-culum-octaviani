@@ -6,6 +6,7 @@ const mongoose =            require('mongoose')
 const Bus =                 require('./models/bus')
 const databaseFunctions =   require('./functions/databaseFunctions')
 const {Server} =            require('socket.io')
+const bodyParser =          require('body-parser')
                             require('dotenv').config() //FIXME: remove before final version
 
 //.................................const..........................................
@@ -16,7 +17,10 @@ const io = new Server(server)
 const PORT = process.env.PORT || 3000
 
 const busState = [] //collect the number of people percent {busID:String,perc:Number}
-let activeBusses = []
+
+//FIXME: delete this hard-programmed code
+global.activeBusses = require('./test')
+//console.log(global.activeBusses)
 
 //.....................database connection...................................
 mongoose
@@ -56,9 +60,14 @@ io.on('connection', (socket) => {
 
 //......................EXPRESS.................................
 app.use(express.static(path.join(__dirname, 'CLIENT')))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/a',databaseFunctions.insertFunction)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
+app.post('/activeBusses',(req,res) => {
+    res.json({'busses':global.activeBusses})
+})
 
 
 server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
