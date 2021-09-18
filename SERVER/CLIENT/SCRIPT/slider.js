@@ -6,7 +6,7 @@ let stop = ""
 output.innerText = slider.value + '%';
 
 slider.oninput = () => {
-    output.innerText = this.value + '%';
+    output.innerText = slider.value + '%';
     slider_has_moved = true
 }
 
