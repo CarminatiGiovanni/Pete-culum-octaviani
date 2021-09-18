@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 </head>  
-<body onload="openCity(event, 'first')">
+<body onload="openCity(event, 'first'), loadStops()">
     
     <header class="header clearfix">
         <a href="" class="header__logo"><img src="../IMG/logo.png" height="55px" width="55px"></a>
@@ -40,27 +40,8 @@
              <!---...............................first div..........................................--->
 
             <div id="first" class="page">
-                <div class="timeline">
-                    <div class="container left">
-                      <div class="content" onclick="clickStop(this)" id="bergamo">
-                        <h4>Bergamo - 12:00</h4>
-                      </div>
-                    </div>
-                    <div class="container right">
-                        <div class="content" onclick="clickStop(this)" id="milano">
-                          <h4>Milano - 12:30</h4>
-                        </div>
-                    </div>
-                    <div class="container left">
-                        <div class="content" onclick="clickStop(this)" id="roma">
-                          <h4>Roma - 13:00</h4>
-                        </div>
-                    </div>
-                    <div class="container right">
-                        <div class="content" onclick="clickStop(this)" id="napoli">
-                          <h4>Napoli - 14:00</h4>
-                        </div>
-                    </div>
+                <div class="timeline" id='timeline_bus'>
+                    
                 </div>
                 <div class="slidecontainer" id="slider">
                     <input type="range" min="0" max="100" value="50" class="slider" id="myRange" step="10">
@@ -79,40 +60,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            var slider = document.getElementById("myRange");
-            var output = document.getElementById("value");
-            var slider_has_moved = false
-            output.innerText = slider.value + '%';
-
-            slider.oninput = function() {
-                output.innerText = this.value + '%';
-                slider_has_moved = true
-            }
-
-
-            function openCity(evt, id) {
-                var i, pages, tablinks;
-                pages = document.getElementsByClassName("page");
-                for (i = 0; i < pages.length; i++) {
-                    pages[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(id).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-            var stop = ""
-            function clickStop(el){
-                stop = el.id //name of the stop
-                var blocks = document.getElementsByClassName("content")
-                for (i = 0; i < blocks.length; i++) {
-                    blocks[i].style.backgroundColor = "white";
-                }
-                el.style.backgroundColor = "#3adb6a"
-            }
+        <script src='../SCRIPT/slider.js'>
         </script>
         </div>
     </article>
@@ -123,41 +71,11 @@
 
         <!--.....................................socket io section .................................................-->
         <script src="/socket.io/socket.io.js"></script>
-    <script>
+    <script src='../SCRIPT/socket.js'>
         
-        const scrollbar = document.getElementById('chat')
-
-        function generateChatMessage (busStop,lastPerc,timestamp) {
-            
-            let string = `
-            <p class="scroll__message">${timestamp} - ${lastPerc} - ${busStop}</p>
-            `
-            return string
-        }
-
-        const socket = io();
-        socket.emit('bus-id',window.location.pathname.substring(5))
-
-        //for(let i = 0; i< 30;i ++)emit_position_2() //FIXME: decommentami
-
-        socket.on('update',({busStop,lastPerc,timestamp})=> {
-            console.log(busStop,lastPerc,timestamp)
-            scrollbar.innerHTML += generateChatMessage(busStop,lastPerc,timestamp)
-        })
-
-        ///test
-        function emit_position_2(){
-            socket.emit('infopos',{busStop:'Piazza Brembana',lastPerc: Math.floor( Math.random() * 100) })    
-        }
-
-        function sendPosition(){
-            if(stop && slider_has_moved) {
-                console.log('stop: ', stop, 'output: ', output.innerText)
-                socket.emit('infopos', {busStop: stop,lastPerc: output.innerText})
-            }
-        }
-
     </script>
+
+    <script src='../SCRIPT//loadStops.js'></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>

@@ -19,8 +19,16 @@ const PORT = process.env.PORT || 3000
 
 const busState = [] // [] //collect the number of people percent {busID:String,perc:Number}
 
-global.activeBusses = [] //require('./test') // = []
+global.activeBusses = require('./test') // = []
 global.activeChats = {} //list of string:lists of messages
+//FIXME: hardcode
+
+global.activeBusses.forEach(element => {
+    global.activeChats[element.id] = []
+});
+
+console.log(activeChats)
+
 //console.log(global.activeBusses)
 
 //.....................database connection...................................
@@ -28,7 +36,7 @@ mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
-        databaseFunctions.find_the_next_bus()
+        //databaseFunctions.find_the_next_bus()
         server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
@@ -51,12 +59,13 @@ io.on('connection', (socket) => {
         let timeNow = new Date()
         let timestamp = timeNow.toTimeString().split(' ')[0].substring(0,5)
         io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
-        global.activeChats[busId].push({busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
+        //console.log(busId)
+        try{global.activeChats[busId].push({busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})}catch(e){console.log('error')}
     })
 
     socket.on('leaveRoom',(msg)=> {
         socket.leave(busId)
-        busid = undefined
+        busId = undefined
     })
 
     socket.on('disconnect', () => {
@@ -77,7 +86,6 @@ app.get('/bus/:id',(req,res) => {
 })
 
 app.get('/insertVespasianus',insertFunctions.insertVespasianus)
-
 app.get('/insertFountains',insertFunctions.insertFountain)
 
 
