@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Pete culum Octaviani</title>
     <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="./STYLE/style.css">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>  
-<body>
     <script src="./SCRIPT/busses.js"></script>
+</head>  
+<body onload="loadBusses()">
     <header class="header clearfix">
         <a href="" class="header__logo">logo</a>
         <a href="" class="header__icon-bar">
@@ -39,7 +38,7 @@
         </div>
     </section>
 
-    <section class="cards clearfix">
+    <section class="cards clearfix" id = 'bussesCards'>
         <div class="card">
             <img class="card__image" src="https://source.unsplash.com/400x260/?nature" alt="Nature">
             <div class="card__copy">

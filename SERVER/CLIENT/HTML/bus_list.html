@@ -11,14 +11,20 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link rel="stylesheet" href="../STYLE/style.css">
-    </head>  
-    <script>
-        const redirect = (el) => {
-            location.replace("http://localhost:3000/bus/" + el.id)
-        }
-    </script>
-    <body>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var url = "http://agblog.altervista.org/"
+            function getApi(){
+                $.ajax(url,function(data){
+                    data = JSON.parse(data);
+                    console.log(data)
+                });
+            }
+        </script>
+    </head>
+    
+    <body onload="getApi()">    
         <header class="header clearfix">
             <a href="" class="header__logo">logo</a>
             <a href="" class="header__icon-bar">
@@ -32,40 +38,9 @@
                 <li class="header__menu__item"><a href="faq.html">FAQ</a></li>
             </ul>
         </header>
-        <section class="cards clearfix">
-            <div class="card__findbus" id="bus-1" onclick="redirect(this)" title="bus-1">
-                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
-                <div class="card__copy">
-                    <h3>PARTENZA</h3>
-                    <h3>DESTINAZIONE</h3>
-                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
-                </div>
-            </div>
-            <div class="card__findbus" id="bus-2" onclick="redirect(this)" title="bus-1">
-                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
-                <div class="card__copy">
-                    <h3>PARTENZA</h3>
-                    <h3>DESTINAZIONE</h3>
-                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
-                </div>
-            </div>
-            <div class="card__findbus" id="bus-3" onclick="redirect(this)" title="bus-1">
-                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
-                <div class="card__copy">
-                    <h3>PARTENZA</h3>
-                    <h3>DESTINAZIONE</h3>
-                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
-                </div>
-            </div>
-            <div class="card__findbus" id="bus-4" onclick="redirect(this)" title="bus-1">
-                <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bus_stop_symbol.svg/1112px-Bus_stop_symbol.svg.png" alt="Nature">
-                <div class="card__copy">
-                    <h3>PARTENZA</h3>
-                    <h3>DESTINAZIONE</h3>
-                    <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo.</p>
-                </div>
-            </div>
-        </section> 
+        
+
+
         <!-- Footer -->
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
@@ -203,7 +178,7 @@
         
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © 2020 Copyright:
+            Â© 2020 Copyright:
             <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
             </div>
             <!-- Copyright -->
