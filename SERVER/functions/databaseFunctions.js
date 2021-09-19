@@ -72,6 +72,8 @@ const find_the_next_bus = () => {
 
     Bus.find()
         .then(result => {
+            //console.log(result)
+
             result.forEach(element => {
                 global.orderedListOfBus.add({date:findDateOfBusoObject(element),bus: element})
             });
@@ -89,11 +91,18 @@ const find_the_next_bus = () => {
             //....................................................................................
 
             global.orderedListOfBus.sort((a,b) => {return a.date - b.date})
+
+            //console.log(global.orderedListOfBus)
+
             let today = new Date()
+
+            let conta = 0
+
             global.orderedListOfBus.forEach(el => {
                 let delay = el.date - today
-                //console.log(delay)
+                if(conta < 10) console.log(delay)
                 setTimeout(() => addToActiveBusses(),delay)
+                conta ++
             })
 
         })

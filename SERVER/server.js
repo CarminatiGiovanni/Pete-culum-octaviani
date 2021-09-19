@@ -8,6 +8,7 @@ const insertFunctions =     require('./functions/insertFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
 const getPostFunctions =    require('./functions/getPostFunctions')
+const generateAndSave =     require('./testing/populateDb')
                             require('dotenv').config() //FIXME: remove before final version
 
 //.................................const..........................................
@@ -19,15 +20,15 @@ const PORT = process.env.PORT || 3000
 
 const busState = [] // [] //collect the number of people percent {busID:String,perc:Number}
 
-global.activeBusses = require('./test') // = []
+global.activeBusses = [] //require('./test') // = []
 global.activeChats = {} //list of string:lists of messages
-//FIXME: hardcode
 
-global.activeBusses.forEach(element => {
-    global.activeChats[element.id] = []
-});
 
-console.log(activeChats)
+// global.activeBusses.forEach(element => {
+//     global.activeChats[element.id] = []
+// });
+
+// console.log(activeChats)
 
 //console.log(global.activeBusses)
 
@@ -36,7 +37,10 @@ mongoose
     .connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('DB connected')
-        //databaseFunctions.find_the_next_bus()
+        databaseFunctions.find_the_next_bus()
+
+        //generateAndSave()
+
         server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
