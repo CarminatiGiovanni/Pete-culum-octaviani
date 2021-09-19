@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./STYLE/style.css">
 </head>   
 <body>
+    
     <header class="header clearfix">
         <a href="" class="header__logo"><img src="IMG/logo.png" height="55px" width="55px"></a>
         <a href="" class="header__icon-bar">
@@ -21,8 +22,9 @@
         </a>
         <ul class="header__menu animate">
             <li class="header__menu__item"><a href="/">Home</a></li>
-            <li class="header__menu__item"><a href="/CURSOR">Find your bus</a></li>
-            
+            <li class="header__menu__item"><a href="/CURSOR">Find Bus</a></li>
+            <li class="header__menu__item"><a href="/AboutUs">About US</a></li>
+            <li class="header__menu__item"><a href="/AboutCursor">About Cursor</a></li>
         </ul>
     </header>
 
@@ -31,22 +33,22 @@
         <div class="cover__caption">
             <div class="cover__caption__copy">
                 <span class="header__title">CURSOR</span>
-                <h2>Free website developed by Pete Culum Octaviani - Hackathon2021</h2>
-                <a href="/CURSOr" class="button" style="color: #912826;">FIND YOUR BUS</a>
+                <h2>Free website developed by Pete Culum Octaviani Hackathon2021</h2><br><br>
+                <a href="/CURSOR" class="button" style="color: #912826;">FIND YOUR BUS</a>
             </div>
         </div>
     </section>
 
     <section class="cards clearfix" id = 'bussesCards'>
-        <!-- <div class="card">
-            <img class="card__image" src="IMG/hackathon.png">
-            <div class="card__copy">
-                <h3>Hackathon 2021</h3>
-                <p>Hackaton is an annual event that stimulates kids' creativity by giving them a track and 48 hours</p>
-            </div>
-        </div> -->
         <div class="card">
-            <img class="card__image" src="https://cdn.discordapp.com/attachments/888056810639089705/888485067104616508/cursorRisorsa_1logo-scritta.png">
+            <img class="card__image" src="./IMG/sorintHackaton.jpg">
+            <div class="card__copy">
+                <h3>The problem</h3>
+                <p>How bad is when the bus is late, it's cold, it's raining and when finally the bus arrives is full! <i>CURSOR</i> is the solution!</p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card__image" src="./IMG/carro.jpg">
             <div class="card__copy">
                 <h3>Cursor</h3>
                 <p>Cursor is an application to check in real time the position of the bus. To keep track of the bus position is not the server but the <b>user comunity!</b></p>
@@ -72,11 +74,8 @@
        </div>
     </section>
 
-    
-
     <footer class="footer">
         <p>Theme by Davide Scotti</p>
-
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

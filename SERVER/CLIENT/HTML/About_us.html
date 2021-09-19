@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../STYLE/About.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>  
+<body>
+    
+    <header class="header clearfix">
+        <a href="" class="header__logo"><img src="../IMG/logo.png" height="55px" width="55px"></a>
+        <a href="" class="header__icon-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+        <ul class="header__menu animate">
+            <li class="header__menu__item"><a href="/">Home</a></li>
+            <li class="header__menu__item"><a href="/CURSOR">Find Bus</a></li>
+            <li class="header__menu__item"><a href="/AboutUs">About US</a></li>
+            <li class="header__menu__item"><a href="/AboutCursor">About Cursor</a></li>
+        </ul>
+    </header>
+
+    <section class="cover cover--single">
+        <div class="cover__filter"></div>
+        <div class="cover__caption">
+            <div class="cover__caption__copy">
+                <span class="header__title">ABOUT US</span>
+                <br><br><br>
+                <h2>Pete Culum Octaviani</h2>
+            </div>
+        </div>
+    </section><br><br>
+
+    <section class="banner clearfix">
+        <div class="banner__image__p1"></div>
+        <div class="banner__copy">
+            <div class="banner__copy__text">
+                <h3>Davide Scotti</h3>
+                <h4>5°IB Student's</h4>
+                <p>Hi, I'm Davide Scotti, I'm 17 and I attend ITIS Pietro Paleocapa in Bergamo. I mainly dedicate myself to programming in CSS and C #, I really like sports and I love to travel.But the thing I care about most are friends.</p>
+                <a href="#" class="fa fa-linkedin"></a>
+                <a href="https://www.instagram.com/davo_03_/" class="fa fa-instagram"></a>
+                <a href="https://github.com/Davide-Scotti" class="fa fa-github"></a>
+            </div>
+       </div>
+    </section><br><br>
+
+<section class="banner clearfix">
+    <div class="banner__image__p2"></div>
+    <div class="banner__copy">
+        <div class="banner__copy__text">
+            <h3>Giovanni Carminati</h3>
+            <h4>5°IB Student's</h4>
+            <p>Attending ITIS P. Paleocapa, very interested about the JS especially for the backend. I love mountain and I often go rock climbing, in the picture I was finally arrived after a long walk! If you are interested about my projects please visit my <a href=" https://carminati.altervista.org/">website</a></p>
+            <a href="https://www.linkedin.com/in/giovanni-carminati-09ab35212/" class="fa fa-linkedin"></a>
+            <a href="https://www.instagram.com/giovannii.carmi/" class="fa fa-instagram"></a>
+            <a href="https://github.com/HeyJOe03" class="fa fa-github"></a>
+        </div>
+   </div>
+</section><br><br>
+
+<section class="banner clearfix">
+    <div class="banner__image__p3"></div>
+    <div class="banner__copy">
+        <div class="banner__copy__text">
+        <h3>Andrea Gritti</h3>
+        <h4>4°IB Student's</h4>
+        <p>Hi, I'm Andrea Gritti, I'm 17 and I attend ITIS Pietro Paleocapa in Bergamo. For some years now I have enjoyed computer science and in particular what concerns web development.</p>
+        <a href="#" class="fa fa-linkedin"></a>
+        <a href="https://instagram.com/_.andreagritti._" class="fa fa-instagram"></a>
+        <a href="https://github.com/AndreaG25" class="fa fa-github"></a>
+   </div>
+</section><br><br>
+
+<section class="banner clearfix">
+    <div class="banner__image__p4"></div>
+    <div class="banner__copy">
+        <div class="banner__copy__text">
+        <h3>Antonio Cattaneo</h3>
+        <h4>4°IB Student's</h4>
+        <p>Hi, I'm Antonio Cattaneo, I'm 17 and I attend ITIS Pietro Paleocapa in Bergamo. For this website i create the icon and i helped mine temmate for the frontend parts, i really enjoyed this competition.</p>
+        <a href="#" class="fa fa-linkedin"></a>
+        <a href="https://www.instagram.com/anto._catta/" class="fa fa-instagram"></a>
+        <a href="https://github.com/AntoCatta" class="fa fa-github"></a>
+   </div>
+</section>
+
+<footer class="footer">
+    <p>Theme by Davide Scotti</p>
+</footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $(".header__icon-bar").click(function(e){
+
+                $(".header__menu").toggleClass('is-open');
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

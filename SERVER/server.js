@@ -27,9 +27,6 @@ mongoose
     .then(() => {
         console.log('DB connected')
         databaseFunctions.find_the_next_bus()
-
-        //generateAndSave()
-
         server.listen(PORT,() => console.log(`>Server is listening on PORT: ${PORT}`))
     })
     .catch(err => console.log(err))
@@ -74,6 +71,8 @@ app.get('/CURSOR',get.cursor)
 
 app.get('/all-busses',databaseFunctions.selectAllFunction) //to view all the busses in the DB
 app.get('/bus/:id',get.bus)
+app.get('/aboutUs',get.aboutUs)
+app.get('/aboutCursor',get.aboutCursor)
 
 app.get('/jsonToAddToDB',get.jsonAdd)
 
