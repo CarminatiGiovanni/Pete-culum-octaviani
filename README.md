@@ -1,4 +1,4 @@
-***for a better user-experience we suggest to visit the website using a mobile***, the application is thought to be used during the travels
+***for a better user-experience we suggest to visit the website using a mobile***
 
 # **CURSOR**
 https://pete-culum-octaviani.herokuapp.com/ <br>
@@ -7,6 +7,8 @@ Cursor is an application to check in real time the position of the bus and the q
 ## Description
 For every bus on the road there is a chat where you can send information about the position of the bus and the quantity of people in percentage. Visualize the full chat permit you to predict how late is the bus, if there is traffic and if you will find a place to seat or it's better take another bus. The server create the chats when the bus leave and close it when it has arrived.
 On the timeline of the application you can also see every stop and the time the bus should arrive.
+
+The application is thought to be used by the travellers that often takes the bus, by students to go to school or for all the people are waiting for the bus.
 
 ## Installation
 The server-side application is used using NodeJS, the website is available at https://pete-culum-octaviani.herokuapp.com/.
