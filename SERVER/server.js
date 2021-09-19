@@ -97,11 +97,14 @@ app.get('/bus/:id',(req,res) => {
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_position.html'))
 })
 
-app.get('/insertVespasianus',insertFunctions.insertVespasianus)
-app.get('/insertFountains',insertFunctions.insertFountain)
+app.get('/jsonToAddToDB',(req,res) => res.sendFile(path.join(__dirname,'CLIENT','HTML','insert.html')))
 
 
 app.post('/busPosition', getPostFunctions.busPosition)
+app.post('/jsonToAddToDB',(req,res) => {
+    console.log(req.body)
+    res.status(200)
+})
 
 app.post('/activeBusses',(req,res) => {
     res.json({'busses':global.activeBusses})

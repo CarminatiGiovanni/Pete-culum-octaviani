@@ -17,7 +17,7 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <title>Hello, world!</title>
+    <title>Insert Bus</title>
   </head>
   <body>
     
@@ -40,48 +40,28 @@
 
     <div class="form">
         <div class="form-group">
-            <label for="fermata">Partenza</label>
-            <input type="text" class="form-control" id="fermata" placeholder="Inserisci il luogo di partenza">
-            <label for="appt">Orario di partenza:</label>
-            <input type="time" id="orario"> <br>
+            <label for="busID">ID</label>
+            <input type="text" class="form-control" id="busId" placeholder="ex: AA000BB">
+            <label for="day">Day of the week: (MON,TUE,WEN...)</label>
+            <input type="text" class="form-control" id="day" placeholder="ex: SAT">
         </div>
-        <br><button type="button" class="btn btn-primary" id="addItem" onclick="aggiungiItem()">Aggiungi fermata</button>
-        <div id="fermate"></div>
-        <div class="form-group">
-            <label for="fermata">Destinazione</label>
-            <input type="text" class="form-control" id="fermata" placeholder="Inserisci la destinazione">
-            <label for="appt">Orario di arrivo:</label>
-            <input type="time" id="orario">
+        <br><button type="button" class="btn btn-primary" id="addItem" onclick="aggiungiItem()">Add stop</button>
+        <div id="fermate">
+          <div>
+            <label>1 - Stop name:</label> &nbsp; &nbsp;&nbsp;&nbsp;<label for='appt'>HH:mm : </label><input type='time' name='orario_di_arrivo' id='orario'>
+            <br>
+            <input type='text' class='form-control placeholder='atop' id='fermata'>
+            <br>
+          </div>
+          <div>
+            <label>2 - Stop name:</label> &nbsp; &nbsp;&nbsp;&nbsp;<label for='appt'>HH:mm : </label><input type='time' name='orario_di_arrivo' id='orario'>
+            <br>
+            <input type='text' class='form-control placeholder='atop' id='fermata'>
+            <br>
+          </div>
         </div>
         <br><br><button type="submit" class="btn btn-primary" onclick="createJSON()">Submit</button>
     </div>
-    <script>
-        var fermate = 1
-        const aggiungiItem = () =>{
-            fermate++;
-            $("#fermate").append("<label>Scrivi la " + fermate + " fermata</label><br><input type='text' class='form-control placeholder='Type something...' id='fermata'><br><label for='appt'>Orario di arrivo: </label><input type='time' name='orario_di_arrivo' id='orario'><br>")
-        }
-        const createJSON = () => {
-          fermate++
-          let fermateArray = document.querySelectorAll("#fermata")
-          let orari = document.querySelectorAll("#orario")
-          let lista = []
-          for(let i = 0; i < fermate; i++){
-            lista.push({
-              fermata: fermateArray[i].value,
-              orario: orari[i].value
-            })
-          }
-          let data = {
-            partenza: fermateArray[0].value,
-            arrivo: fermateArray[fermate-1].value,
-            ora_partenza: orari[0].value,
-            ora_arrivo: orari[fermate-1].value,
-            fermate: fermate,
-            lista: lista
-          }
-          console.log(data)
-        }
-    </script>
+    <script src='./../SCRIPT/insertPage.js'></script>
   </body>
 </html>

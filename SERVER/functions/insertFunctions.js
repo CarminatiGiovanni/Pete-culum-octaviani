@@ -1,6 +1,4 @@
 const Bus =                 require('./../models/bus')
-const Vespasianus =         require('./../models/vespasianus')
-const Fountain =            require('./../models/fountain')
 
 const insertBus = (req,res) => {
     const bus = new Bus(
@@ -24,41 +22,4 @@ const insertBus = (req,res) => {
         .catch(err => console.log(err))
 }
 
-const insertFountain = (req,res) => {
-    const fountain = new Fountain(
-        {
-            id:"VS1234",
-            coordY:45.4145,
-            coordX:9.4001,
-            closed:false,
-            potable:true,
-            description: "Near the bus station in the middle of the square"
-        }
-    )
-
-
-    fountain.save()
-        .then((result) => {res.send(result)})
-        .catch(err => console.log(err))
-}
-
-const insertVespasianus = (req,res) => {
-    const vespasianus = new Vespasianus(
-        {
-            id:"VS1234",
-            coordY:45.4145,
-            coordX:9.4001,
-            forDisable:true,
-            description: "Near the bus station"
-        }
-    )
-
-
-    vespasianus.save()
-        .then((result) => {res.send(result)})
-        .catch(err => console.log(err))
-}
-
 module.exports.insertBus = insertBus
-module.exports.insertVespasianus = insertVespasianus
-module.exports.insertFountain = insertFountain
