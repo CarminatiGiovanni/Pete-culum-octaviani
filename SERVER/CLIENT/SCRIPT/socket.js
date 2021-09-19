@@ -3,9 +3,9 @@
 const scrollbar = document.getElementById('chat')
 
 const generateChatMessage = (busStop,lastPerc,timestamp) => {
-    let string = `
-    <p class="scroll__message">${timestamp} - ${lastPerc} - ${busStop}</p>
-    `
+    let string = 
+    `<p class="scroll__message">${timestamp}: ${lastPerc} - ${busStop}</p>`
+    
     return string
 }
 

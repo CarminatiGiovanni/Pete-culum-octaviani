@@ -1,7 +1,7 @@
-let slider = document.getElementById("myRange");
-let output = document.getElementById("value");
-let slider_has_moved = false
-let stop = ""
+var slider = document.getElementById("myRange");
+var output = document.getElementById("value");
+var slider_has_moved = false
+var stop = ""
 
 output.innerText = slider.value + '%';
 
@@ -31,6 +31,8 @@ const clickStop = (el) => {
     let blocks = document.getElementsByClassName("content")
     for (i = 0; i < blocks.length; i++) {
         blocks[i].style.backgroundColor = "white";
+        blocks[i].style.color = "black";
     }
-    el.style.backgroundColor = "#3adb6a"
+    el.style.backgroundColor = "#912826"
+    el.style.color = "#fff"
 }
