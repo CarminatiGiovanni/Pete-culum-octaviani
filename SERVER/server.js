@@ -6,7 +6,7 @@ const mongoose =            require('mongoose')
 const databaseFunctions =   require('./functions/databaseFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
-const post =    require('./functions/POST')
+const post =                require('./functions/POST')
 const so =                  require('./functions/socketIOf')
 const get =                 require('./functions/GET')
 
