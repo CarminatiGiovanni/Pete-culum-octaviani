@@ -1,7 +1,7 @@
-var slider = document.getElementById("myRange");
-var output = document.getElementById("value");
-var slider_has_moved = false
-var stop = ""
+let slider = document.getElementById("myRange");
+let output = document.getElementById("value");
+let slider_has_moved = false
+let stop = ""
 
 output.innerText = slider.value + '%';
 

@@ -6,7 +6,7 @@ body {
 body {
 	background: #eee;
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
 	width: 0px;
 }
 /*----------------------------
@@ -39,11 +39,11 @@ a:hover {
            HEADER
 ----------------------------*/
 .header {
-    background: #333;
-    top: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    z-index: 2;
+	background: #333;
+	top: 0;
+	position: -webkit-sticky;
+	position: sticky;
+	z-index: 2;
 }
 .header__logo {
 	float: left;
@@ -148,7 +148,7 @@ a:hover {
 .card__findbus {
 	width: 30%;
 	text-align: center;
-	height: 300px;
+	height:300px;
 	margin: 5% 5%;
 	background-color: #fff;
 	border-radius: 5%;
@@ -163,16 +163,13 @@ a:hover {
 
 .card__copy1 {
 	padding: 10px 20px;
-	height:min-content;
 }
 .card__copy {
 	padding: 5px 20px;
-	height:min-content;
 }
 
 .card__copy h3 {
 	margin-bottom: 0;
-	height:min-content;
 }
 /*----------------------------
            BANNER
@@ -217,17 +214,17 @@ a:hover {
           FOOTER
 ----------------------------*/
 .footer {
-    background: #333;
-    text-align: center;
-    padding: 10px;
-    vertical-align: center;
-    color: #fff;
-    margin-top: 40px;
-    width: 100%;
-    bottom: 0;
-    /*position: -webkit-sticky;
-    position: absolute;*/
-    z-index: 1;
+	background: #333;
+	text-align: center;
+	padding: 10px;
+	vertical-align: center;
+	color: #fff;
+	margin-top: 40px;
+	width: 100%;
+	bottom: 0;
+	position: -webkit-sticky;
+	position: sticky;
+	z-index: 1;
 }
 /*----------------------------
             SINGLE
