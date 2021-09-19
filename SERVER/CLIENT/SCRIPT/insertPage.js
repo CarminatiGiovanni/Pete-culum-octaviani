@@ -34,7 +34,7 @@ const createJSON = () => {
     }
     console.log(data)
 
-    sendJsonToServer(data)
+    sendJsonToServer({pw:document.querySelector('#day').value,data:data})
 }
 
 const address = window.location.protocol + '//' + window.location.host + '/jsonToAddToDB'

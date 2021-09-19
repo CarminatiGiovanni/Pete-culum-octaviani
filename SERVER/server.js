@@ -91,7 +91,7 @@ app.get('/',(req,res) => {
 app.get('/CURSOR',(req,res) => {
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_list.html'))
 })
-app.get('/a',insertFunctions.insertBus)
+
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.get('/bus/:id',(req,res) => {
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_position.html'))
@@ -102,7 +102,8 @@ app.get('/jsonToAddToDB',(req,res) => res.sendFile(path.join(__dirname,'CLIENT',
 
 app.post('/busPosition', getPostFunctions.busPosition)
 app.post('/jsonToAddToDB',(req,res) => {
-    console.log(req.body)
+    //console.log(req.body.data)
+    if(req.body.pw === process.env.PWinsert) insertFunctions.insertBus(req.body.data)
     res.status(200)
 })
 
