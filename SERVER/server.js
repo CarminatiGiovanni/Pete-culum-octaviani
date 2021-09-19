@@ -9,7 +9,7 @@ const post =                require('./functions/POST')
 const get =                 require('./functions/GET')
 const path =                require('path')
 
-                            require('dotenv').config() //FIXME: remove before final version
+                            //require('dotenv').config()
 
 //.................................const..........................................
 const app = express()
