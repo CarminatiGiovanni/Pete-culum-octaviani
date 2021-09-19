@@ -8,7 +8,7 @@ const insertFunctions =     require('./functions/insertFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
 const getPostFunctions =    require('./functions/getPostFunctions')
-const generateAndSave =     require('./testing/populateDb')
+//const generateAndSave =     require('./testing/populateDb')
                             require('dotenv').config() //FIXME: remove before final version
 
 //.................................const..........................................
@@ -79,10 +79,18 @@ io.on('connection', (socket) => {
 });
 
 //......................EXPRESS.................................
-app.use(express.static(path.join(__dirname, 'CLIENT')))
+
+app.use(express.static(path.join(__dirname,'/CLIENT'))) //FOR CSS
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.get('/',(req,res) => {
+    console.log('hellow orld') 
+    res.sendFile(path.join(__dirname,'/CLIENT/index.html'))
+})
+app.get('/findBus',(req,res) => {
+    res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_list.html'))
+})
 app.get('/a',insertFunctions.insertBus)
 app.get('/all-busses',databaseFunctions.selectAllFunction)
 app.get('/bus/:id',(req,res) => {

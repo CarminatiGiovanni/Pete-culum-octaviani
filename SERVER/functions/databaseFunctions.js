@@ -96,13 +96,13 @@ const find_the_next_bus = () => {
 
             let today = new Date()
 
-            let conta = 0
+            //let conta = 0
 
             global.orderedListOfBus.forEach(el => {
                 let delay = el.date - today
-                if(conta < 10) console.log(delay)
+                //if(conta < 10) console.log(delay)
                 setTimeout(() => addToActiveBusses(),delay)
-                conta ++
+                //conta ++
             })
 
         })
