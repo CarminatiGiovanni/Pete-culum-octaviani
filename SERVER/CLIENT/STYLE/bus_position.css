@@ -5,6 +5,7 @@
 }
 .tab {
     overflow: hidden;
+    margin-top: 55px;
     border: 1px solid #eee;
     background-color: #eee;
 }
@@ -205,7 +206,7 @@
         width: 25px;
         height: 25px;
         border-radius: 50%;
-        background: #3adb6a;
+        background: #912826;
         cursor: pointer;
 }
 
@@ -213,7 +214,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #3adb6a;
+    background: #912826;
     cursor: pointer;
 }
 .progress-bar{
@@ -248,6 +249,15 @@
     font-size: 12px;
     padding: 5px;
 }
-.w3-button{
+.w3-button {
+    font-size: 20px;
+    padding: 14px 40px;
+    color: #FFF;
+    background-color: #912826;
+    transition-duration: 1.0s;
+    -webkit-transition-duration: 1.0s;
     border-radius: 15px;
+}
+.w3-button:hover {
+    box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 0.24), 0 17px 50px 0 rgba(255, 255, 255, 0.19);
 }
