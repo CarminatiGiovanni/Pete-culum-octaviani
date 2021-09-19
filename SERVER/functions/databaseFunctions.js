@@ -46,8 +46,6 @@ const addToActiveBusses = () => {
     let delay = actualBus.date - today
     if(delay < 0)setTimeout(() => addToActiveBusses(),0) //if two busses starts at the same hour
     else setTimeout(() => addToActiveBusses(),delay)
-
-    console.log(global.activeChats)
 }
 
 const findDateOfBusoObject = (bus) => {
@@ -72,37 +70,23 @@ const find_the_next_bus = () => {
 
     Bus.find()
         .then(result => {
-            //console.log(result)
 
             result.forEach(element => {
                 global.orderedListOfBus.add({date:findDateOfBusoObject(element),bus: element})
             });
 
-
-            //..................................HARDCODE...................................//
-            // const b = {"id":"PW236KF","hleaves":"23:06","day":"SAT","stops":[{"n":0,"stop":"Sorisole","h":"06:30"},{"n":1,"stop":"Ponteranica","h":"06:45"},{"n":{"$numberInt":"2"},"stop":"Valtesse","h":"07:15"},{"n":3,"stop":"Monte Rosso","h":"07:25"},
-            // {"n":4,"stop":"Berbenno","h":"23:59"}]}
-
-            // global.orderedListOfBus.add({
-            //     date:findDateOfBusoObject(b),
-            //     bus:b
-            // })
-            //console.log(global.orderedListOfBus)
-            //....................................................................................
-
             global.orderedListOfBus.sort((a,b) => {return a.date - b.date})
-
-            //console.log(global.orderedListOfBus)
 
             let today = new Date()
 
-            //let conta = 0
-
+            let conta = true
             global.orderedListOfBus.forEach(el => {
                 let delay = el.date - today
-                //if(conta < 10) console.log(delay)
+                if(conta) { //............................HARDCODE............................................
+                    delay = 10
+                }
                 setTimeout(() => addToActiveBusses(),delay)
-                //conta ++
+                conta = false
             })
 
         })

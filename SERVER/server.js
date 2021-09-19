@@ -1,14 +1,13 @@
 //...................................require.........................................
 const express =             require('express')
 const http =                require('http')
-const path =                require('path')
 const mongoose =            require('mongoose')
 const databaseFunctions =   require('./functions/databaseFunctions')
 const {Server} =            require('socket.io')
 const bodyParser =          require('body-parser')
 const post =                require('./functions/POST')
-const so =                  require('./functions/socketIOf')
 const get =                 require('./functions/GET')
+const path =                require('path')
 
                             require('dotenv').config() //FIXME: remove before final version
 
@@ -39,10 +38,29 @@ mongoose
 io.on('connection', (socket) => {
     let busId;
     console.log('user has connected')
-    socket.on('bus-id',so.bus_id)
-    socket.on('infopos',so.infoPos)
-    socket.on('leaveRoom',so.leaveRoom)
-    socket.on('disconnect', so.disconnect);
+    socket.on('bus-id',(busid) => {
+        //console.log(busid)
+        socket.join(busid)
+        busId = busid
+    
+        io.to(socket.id).emit('old_messages',(global.activeChats[busId]))
+    })
+    socket.on('infopos',({busStop,lastPerc})=> { //i get the position and i emit that to all the room
+        //console.log(busStop,lastPerc)
+        let timeNow = new Date()
+        let timestamp = timeNow.toTimeString().split(' ')[0].substring(0,5)
+        io.to(busId).emit('update',{busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})
+        //console.log(busId)
+        try{global.activeChats[busId].push({busStop: busStop, lastPerc: lastPerc,timestamp: timestamp})}catch(e){console.log('error')}
+    })
+    socket.on('leaveRoom',(msg)=> {
+        socket.leave(busId)
+        busId = undefined
+    })
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+        socket.leave(busId)
+    });
 });
 
 //......................EXPRESS.................................
