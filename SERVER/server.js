@@ -88,7 +88,7 @@ app.get('/',(req,res) => {
     console.log('hellow orld') 
     res.sendFile(path.join(__dirname,'/CLIENT/index.html'))
 })
-app.get('/findBus',(req,res) => {
+app.get('/CURSOR',(req,res) => {
     res.sendFile(path.join(__dirname,'/CLIENT/HTML/bus_list.html'))
 })
 app.get('/a',insertFunctions.insertBus)

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        .form{
+            width: 50%;
+            margin: 20px 25%;
+        }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+      integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+      crossorigin="anonymous"
+    ></script>
+
+    <div class="form">
+        <div class="form-group">
+            <label for="fermata">Partenza</label>
+            <input type="text" class="form-control" id="fermata" placeholder="Inserisci il luogo di partenza">
+            <label for="appt">Orario di partenza:</label>
+            <input type="time" id="orario"> <br>
+        </div>
+        <br><button type="button" class="btn btn-primary" id="addItem" onclick="aggiungiItem()">Aggiungi fermata</button>
+        <div id="fermate"></div>
+        <div class="form-group">
+            <label for="fermata">Destinazione</label>
+            <input type="text" class="form-control" id="fermata" placeholder="Inserisci la destinazione">
+            <label for="appt">Orario di arrivo:</label>
+            <input type="time" id="orario">
+        </div>
+        <br><br><button type="submit" class="btn btn-primary" onclick="createJSON()">Submit</button>
+    </div>
+    <script>
+        var fermate = 1
+        const aggiungiItem = () =>{
+            fermate++;
+            $("#fermate").append("<label>Scrivi la " + fermate + " fermata</label><br><input type='text' class='form-control placeholder='Type something...' id='fermata'><br><label for='appt'>Orario di arrivo: </label><input type='time' name='orario_di_arrivo' id='orario'><br>")
+        }
+        const createJSON = () => {
+          fermate++
+          let fermateArray = document.querySelectorAll("#fermata")
+          let orari = document.querySelectorAll("#orario")
+          let lista = []
+          for(let i = 0; i < fermate; i++){
+            lista.push({
+              fermata: fermateArray[i].value,
+              orario: orari[i].value
+            })
+          }
+          let data = {
+            partenza: fermateArray[0].value,
+            arrivo: fermateArray[fermate-1].value,
+            ora_partenza: orari[0].value,
+            ora_arrivo: orari[fermate-1].value,
+            fermate: fermate,
+            lista: lista
+          }
+          console.log(data)
+        }
+    </script>
+  </body>
+</html>
