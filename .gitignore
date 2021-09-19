@@ -1,8 +1,8 @@
 #files and folders
 
-test.js
-.env
-testing
+SERVER/test.js
+SERVER/.env
+SERVER/testing
 
 
 # Logs
